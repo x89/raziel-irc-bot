@@ -83,6 +83,8 @@ class DotaPlugin(botologist.plugin.Plugin):
         except dota2api.exceptions.APITimeoutError:
             log.error("Dota2 API Timeout.")
             return None
+        if "Event" in m['game_mode_name']:
+            return None
         return "{mode}{ranked}: score: {radiant_score}-{dire_score}, {winner} victory, duration {duration}m. {our_scores} {dotabuff}".format(
             time=datetime.datetime.fromtimestamp(
                 m['start_time']).strftime('%b %d'),
